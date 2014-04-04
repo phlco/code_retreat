@@ -1,5 +1,7 @@
 # Code Retreat
 
+We're pairing in 45 minute sessions.
+
 ```
 students = ["Bill_Stites",
             "Brian_Donegan",
@@ -23,35 +25,47 @@ students = ["Bill_Stites",
             "Talal_Choudhury",
             "Thomas_Liou",
             "Xavier_Stewart"]
+
+while students.any?
+  students.shuffle!
+  pair = students.pop(2)
+  puts "Pair! #{pair}\nKeep? y/n"
+  choice = gets.chomp.downcase
+  pair.each { |student| students << student } if choice == "n"
+end
+
+puts "May the odds be ever in your favor"
 ```
 
 ## Choose two constraints
 
-One level of indentation per method
-Don’t use the ELSE keyword
-First class collections
-One dot per line
-Don’t abbreviate
-Keep all entities small
-No classes with more than two instance variables
-No getters/setters/properties
-Methods can only be three lines (excluding def and end)
-No Mouse or Trackpad
-No talking
-Back Seat Driver. Navigator Dictates.
+```
+constraints = ["One level of indentation per method",
+               "Don’t use the ELSE keyword",
+               "Don’t abbreviate",
+               "Keep all entities small",
+               "Max three lines for methods, excluding `def` and `end`,
+               "No classes with more than two instance variables",
+               "Methods can only be three lines (excluding def and end)",
+               "No Mouse or Trackpad",
+               "No talking",
+               "Back Seat Driver. Navigator Dictates."]
+```
 
 ## 4 Principals to Focus On
 
-Small
-DRY
-Well Named
-Tested
+- Small
+- DRY
+- Well Named
+- Tested
 
 ## Retreats
 
+Pair 1
+
 # String Calculator
 
-Create a simple String calculator with a method int Add(string numbers)
+Create a simple String calculator with a method Add(string numbers)
 The method can take 0, 1 or 2 numbers, and will return their sum (for an empty string it will return 0) for example "" or "1" or "1,2"
 
 Start with the simplest test case of an empty string and move to 1 and two numbers
@@ -67,36 +81,43 @@ the following input is ok:  "1\n2,3"  (will equal 6)
 the following input is NOT ok:  "1,\n" (not need to prove it - just clarifying)
 
 Support different delimiters
-to change a delimiter, the beginning of the string will contain a separate line that looks like this:   "//[delimiter]\n[numbers…]" for example "//;\n1;2" should return three where the default delimiter is ‘;’ .
-the first line is optional. all existing scenarios should still be supported
-Calling Add with a negative number will throw an exception "negatives not allowed" - and the negative that was passed.if there are multiple negatives, show all of them in the exception message
-Numbers bigger than 1000 should be ignored, so adding 2 + 1001  = 2
-Delimiters can be of any length with the following format:  "//[delimiter]\n" for example: "//[***]\n1***2***3" should return 6
-Allow multiple delimiters like this:  "//[delim1][delim2]\n" for example "//[*][%]\n1*2%3" should return 6.
+to change a delimiter, the beginning of the string will contain a separate line that looks like this:
+
+```
+"//[delimiter]\n[numbers…]"
+```
+
+for example `"//;\n1;2"` should return three where the default delimiter is ';' .
+
+the first line is optional. All existing scenarios should still be supported
+
+Calling Add with a negative number will raise an error with the message "negatives not allowed" - and the negative that was passed.if there are multiple negatives, show all of them in the exception message
+
+Numbers bigger than 1000 should be ignored, so adding `2 + 1001  = 2`
+
+Delimiters can be of any length with the following format:
+
+```
+"//[delimiter]\n"
+```
+
+for example:
+
+`"//[***]\n1***2***3"` should return `6`
+
+Allow multiple delimiters like this:
+
+```
+"//[delim1][delim2]\n"
+```
+
+for example `"//[*][%]\n1*2%3"` should return `6`.
+
 make sure you can also handle multiple delimiters with length longer than one char
 
-# Robots
+## Rest of day
 
-Robot
-
-Create a Robot which:
-
-has coordinates on an x,y plane that specify her location
-has a bearing of north, south, east, or west
-can turn left and right
-can advance
-RobotSimulator
-
-Beyond the robot itself, create a RobotSimulator which can...
-
-place a robot at an arbitrary coordinate with a bearing
-take an instruction sequence like "LARA" and cause a robot to turn left, advance, turn right, and advance
-
-Other Classes
-
-Outside of Robot and RobotSimulator, you're welcome to create any classes/modules that are helpful to your implementation.
-
-# Battleship
+# Battleship!
 
 Pre-Game Layout
 
@@ -111,6 +132,7 @@ Battleship - 4 squares
 Submarine - 3 squares
 Cruiser - 3 squares
 Destroyer - 2 squares
+
 The Rules
 
 Each turn, a player calls out one shot onto the other player's board.
@@ -122,59 +144,6 @@ If each square of a boat has been hit, they player responds "hit, you sunk my [X
 A player never gets more than one shot in a turn
 If all of a player's ships are sunk, the opponent wins
 Play does not stop until one player wins
-
-
-# Bowling
-
-![:image]http://www.iowabowl.com/jcusbcba/Tips/bowling_score_frame.jpg
-
-The game consists of 10 frames as shown above.  In each frame the player has
-two opportunities to knock down 10 pins.  The score for the frame is the total
-number of pins knocked down, plus bonuses for strikes and spares.
-
-A spare is when the player knocks down all 10 pins in two tries.  The bonus for
-that frame is the number of pins knocked down by the next roll.  So in frame 3
-above, the score is 10 (the total number knocked down) plus a bonus of 5 (the
-number of pins knocked down on the next roll.)
-
-A strike is when the player knocks down all 10 pins on his first try.  The bonus
-for that frame is the value of the next two balls rolled.
-
-In the tenth frame a player who rolls a spare or strike is allowed to roll the extra
-balls to complete the frame.  However no more than three balls can be rolled in
-tenth frame.
-
-Write a class named "Game" that has two methods
-
-roll(pins) is called each time the player rolls a ball.  The argument is the number of pins knocked down.
-score() is called only at the very end of the game.  It returns the total score for that game.
-
-# Game of Life
-
-The universe of the Game of Life is an infinite two-dimensional orthogonal grid of square cells, each of which is in one of two possible states, live or dead. Every cell interacts with its eight neighbors, which are the cells that are directly horizontally, vertically, or diagonally adjacent. At each step in time, the following transitions occur:
-
-Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
-Any live cell with more than three live neighbours dies, as if by overcrowding.
-Any live cell with two or three live neighbours lives on to the next generation.
-Any dead cell with exactly three live neighbours becomes a live cell.
-
-The initial pattern constitutes the seed of the system. The first generation is created by applying the above rules simultaneously to every cell in the seed?births and deaths happen simultaneously, and the discrete moment at which this happens is sometimes called a tick (in other words, each generation is a pure function of the one before). The rules continue to be applied repeatedly to create further generations.
-
-# Boggle
-
-Letters are layed out in a 4 x 4 grid.  Players search for words that can be constructed from the letters of sequentially adjacent cubes, where "adjacent" cubes are those horizontally, vertically, and diagonally neighboring.
-
-Words must be at least three letters long, may include singular and plural (or other derived forms) separately, but may not use the same letter cube more than once per word.
-
-| Word length | Points |
-| ----------- | ------ |
-| 3, 4        |      1 |
-| 5           |      2 |
-| 6           |      3 |
-| 7           |      5 |
-| 8+          |     11 |
-
-One cube is printed with "Qu." This is because Q is nearly always followed by U in English words (see exceptions), and if there were a Q in Boggle, it would be challenging to use if a U did not, by chance, appear next to it. For the purposes of scoring Qu counts as two letters: squid would score two points (for a five-letter word) despite being formed from a chain of only four cubes.
 
 # Gilded Rose
 
